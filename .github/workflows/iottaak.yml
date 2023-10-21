@@ -1,4 +1,4 @@
-name:  Crosscompiler_with_sinaasappelsap
+name: Crosscompiler_with_sinaasappelsap
 
 on:
   push:
@@ -11,15 +11,15 @@ jobs:
 
     steps:
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 16
 
       - name: Set up QEMU for ARM
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
 
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install cross-compiler
         run: sudo apt-get update && sudo apt-get install -y g++-arm-linux-gnueabihf
@@ -28,7 +28,7 @@ jobs:
         run: arm-linux-gnueabihf-g++ helloworld.c -o helloworld-arm
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: compiled-code
-          path: helloworld-arm
+          path: helloworld-arm 
